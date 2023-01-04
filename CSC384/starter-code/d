@@ -1,0 +1,46 @@
+def calculate_pxy(label):
+    pxy = []
+    for i in range(attr_num):
+        if i != 12:
+            count0 = 0
+            count1 = 0
+            for row in label:
+                if row[i] == '0':
+                    count0 += 1
+                else:
+                    count1 += 1
+            cal = ((count0 + 0.1)/(len(label) + 0.2), (count1 + 0.1)/(len(label) + 0.2))
+            pxy.append(cal)
+        else:
+            count0 = 0
+            count1 = 0
+            count2 = 0
+            count3 = 0
+            count4 = 0
+            count5 = 0
+            for row in label:
+                if row[i] == '0':
+                    count0 += 1
+                elif row[i] == '1':
+                    count1 += 1
+                elif row[i] == '2':
+                    count2 += 1
+                elif row[i] == '3':
+                    count3 += 1
+                elif row[i] == '4':
+                    count4 += 1
+                else:
+                    count5 += 1
+            cal = ((count0 + 0.1)/(len(label) + 0.6), (count1 + 0.1)/(len(label) + 0.6), (count2 + 0.1)/(len(label) + 0.6),
+                   (count3 + 0.1)/(len(label) + 0.6), (count4 + 0.1)/(len(label) + 0.6), (count5 + 0.1)/(len(label) + 0.6))
+            pxy.append(cal)
+            
+    return pxy
+
+    def calculate_class_probabilities(model, sample):
+    probabilities = dict()
+    for class_value, class_summaries in model.items():
+        probabilities[class_value] = class_summaries[1]
+        for i in range(attr_num):
+            probabilities[class_value] *= class_summaries[0][i][int(sample[i])]
+    return probabilities
